@@ -1,0 +1,1 @@
+<a href="{{ $pageUrl}}/{{ $data->id }}/edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>

@@ -1,0 +1,1 @@
+<a href="javascript:deleteConfirm({{ $data->id }});" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
