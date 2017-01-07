@@ -1,0 +1,56 @@
+
+<?php if( isset($table['cells'] ) && isset($tableData) && count($tableData) ): ?>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <?php foreach( $table['cells'] as $item ): ?>
+      <th>
+      	<?php if( isset($item['title']) ): ?><?php echo e($item['title']); ?><?php else: ?> &nbsp; <?php endif; ?>
+      </th>
+      <?php endforeach; ?>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<?php foreach( $tableData as $data ): ?>
+    <tr>
+      <th scope="row"><?php echo e($data->id); ?></th>
+      <?php foreach( $table['cells'] as $cell ): ?>
+      <td>
+      <?php if( !isset( $cell['type'] ) || isset( $cell['type'] ) && $cell['type'] == 'text' ): ?>
+      	<?php echo $__env->make( 'admin.table.cells.text' , array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php else: ?>
+      	<?php echo $__env->make( 'admin.table.cells.' . $cell['type']  , array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php endif; ?>
+      </td>
+
+      <?php endforeach; ?>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<script type="text/javascript" >
+
+  function deleteConfirm(id){
+    if( confirm( "Delete?") ){
+      $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        url: '<?php echo e($pageUrl); ?>/' + id + '?_token=' + window.Laravel.csrfToken,
+        success: function(data) {
+          if( data.deleted ){
+            document.location = '<?php echo e($pageUrl); ?>'
+          }
+        }
+      });
+
+
+    }
+  }
+
+</script>
+
+<?php endif; ?>

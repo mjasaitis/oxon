@@ -1,0 +1,18 @@
+<?php 
+$oldValue = old($key);
+
+if( $oldValue !== null ){
+	$value = $oldValue;
+}
+else{
+	if(isset($data)){
+		$value = $data->$key;
+	}
+	else
+		$value = '';
+}
+
+?>
+
+
+<input id="<?php echo e($key); ?>" type="text" class="form-control" name="<?php echo e($key); ?>" value="<?php echo e($value); ?>" autofocus>

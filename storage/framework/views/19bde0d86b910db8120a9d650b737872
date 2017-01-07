@@ -1,0 +1,20 @@
+<?php $__env->startSection('content'); ?>
+	<div class="container">
+		<nav class="navbar navbar-default">
+				<ol class="breadcrumb breadcrumb-left">
+	  			<li><a href="/admin">Home</a></li>
+	  			<li class="active" ><?php echo e($pageTitle); ?></li>
+				</ol>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					 <button onclick="document.location='<?php echo e($pageUrl); ?>/create'" type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">Create new</button>
+				</li>
+			</ul>
+		</nav>
+
+		<?php echo $__env->make( 'admin.table.table' , array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

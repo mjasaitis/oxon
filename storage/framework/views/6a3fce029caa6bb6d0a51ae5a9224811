@@ -1,0 +1,46 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+    <div class="row">
+    <?php if(Auth::guest() ): ?>
+        <?php echo $__env->make("auth.login", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php else: ?>
+    	<table id="videos" class="table">
+    	<thead>
+            <tr>
+                <th>Thumbnail</th>
+                <th>Title</th>
+                <th>Views</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+    	</table>
+
+    	<script >
+    	$(document).ready(function(){
+
+	 		$('#videos').DataTable( {
+	 			"aoColumns": [
+    			    { "mData": "thumbnail" },
+        			{ "mData": "title" },
+        			{ "mData": "views" },
+        			{ "mData": "comments" }
+    			],
+	        	"processing": true,
+	        	"serverSide": true,
+	        	"ajax": "http://localhost:8000/videos/list",
+	        	"order": [[ 2, "desc" ]]
+	    	});
+
+    	});
+    		
+    	</script>
+
+    <?php endif; ?>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
